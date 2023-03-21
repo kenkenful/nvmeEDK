@@ -1,0 +1,7 @@
+modprobe vfio-pci
+echo -n "0000:40:00.0" > /sys/bus/pci/drivers/nvme/unbind
+echo -n "0000:41:00.0" > /sys/bus/pci/drivers/nvme/unbind
+echo vfio-pci > /sys/bus/pci/devices/0000:40:00.0/driver_override
+echo vfio-pci > /sys/bus/pci/devices/0000:41:00.0/driver_override
+echo 0000:40:00.0 > /sys/bus/pci/drivers_probe
+echo 0000:41:00.0 > /sys/bus/pci/drivers_probe

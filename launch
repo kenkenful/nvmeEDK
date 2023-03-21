@@ -1,0 +1,13 @@
+cd images
+
+qemu-system-x86_64 \
+-enable-kvm -m 4G \
+-smp $(nproc) \
+-drive if=pflash,format=raw,file=./OvmfPkg/X64/OVMF_CODE.fd,readonly=on \
+-drive if=pflash,format=raw,file=./OvmfPkg/X64/OVMF_VARS.fd \
+-drive if=ide,format=raw,file=fat:rw:NvmePkg,index=0,media=disk \
+-drive file=nvme://0000:40:00.0/1,format=raw,if=none,id=nvme1 \
+-device nvme,drive=nvme1,serial=nvme-1 \
+-drive file=nvme://0000:41:00.0/1,format=raw,if=none,id=nvme2 \
+-device nvme,drive=nvme2,serial=nvme-2 
+
